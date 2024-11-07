@@ -28,5 +28,13 @@ public class Review {
         this.contents = contents;
     }
 
+    public void fillContents(String word){
+        contents.add(word);
+    }
+
+    public void trimList(){
+
+    }
+
 
 }
