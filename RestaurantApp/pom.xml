@@ -1,0 +1,24 @@
+<project>
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.reviewsystem.review</groupId>
+  <artifactId>DatabaseTutorial</artifactId>
+  <version>0.0.1</version>
+
+  <properties>
+    <maven.compiler.source>21</maven.compiler.source>
+    <maven.compiler.target>21</maven.compiler.target>
+
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.mongodb</groupId>
+      <artifactId>mongodb-driver-sync</artifactId>
+      <version>4.3.4</version>
+    </dependency>
+  </dependencies>
+
+
+</project>
