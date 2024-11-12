@@ -9,27 +9,24 @@ import com.mongodb.client.MongoDatabase;
 
 import com.mongodb.client.model.Filters.*;
 
-private String connectionString = "";
-//TODO: Make text file and make functionality to read it for connectionString
-
 public class Database
 {
+  private String connectionString = "";
+  //TODO: Make text file and make functionality to read it for connectionString
+
+  private final String DBNAME = "";
+  //TODO: Initialize dbname
+
   public static void main(String[] args)
   { //TODO: Remove main method once Database is finished
     System.out.println("main method for testing purposes only");
   }
 
-  public static void upload(Document d)
+  public static void upload(Document d, String collectionName)
   {
-
     try(MongoClient mongoclient = MongoClients.create(connectionString))
     {
-      //TODO: Initialize database name, collection name
-      
-      String dbname = "";
-      String collectionName = "";
-
-      MongoDatabase database = mongoclient.getDatabase(dbname);
+      MongoDatabase database = mongoclient.getDatabase(DBNAME);
 
       MongoCollection<Document> reviewCollection =
         database.getCollection(collectionName);
@@ -44,7 +41,19 @@ public class Database
     }
   }
 
-  public static void read()
+  public static Document read(String collectionName)
   {
+    try(MongoClient mongoclient = MongoClients.create(connectionString))
+    {
+      MongoDatabase database = mongoclient.getDatabase(DBNAME);
+
+      MongoCollection<Document> reviewCollection =
+        database.getCollection(collectionName);
+
+      Document firstDocument = reviewCollection.find().first();
+      //This code can only read the first entry. TODO: Find out how to read other entries
+
+      return firstDocument;
+    }
   }
 }
