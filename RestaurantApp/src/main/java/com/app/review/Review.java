@@ -1,7 +1,6 @@
 package com.app.review;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Review {
 
@@ -73,6 +72,5 @@ public class Review {
 
         return trimmedContents;
     }
-
 
 }
