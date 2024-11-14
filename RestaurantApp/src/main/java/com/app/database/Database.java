@@ -55,5 +55,10 @@ public class Database
 
       return firstDocument;
     }
+    catch(Exception e)
+    {
+      System.out.println(
+        "An error has occured while reading from the database.");
+    }
   }
 }
