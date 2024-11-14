@@ -25,3 +25,9 @@ replay_pid*
 
 # Vim Temp Files
 *.swp
+
+# Maven Target folder
+*/target/**
+
+# Connection String txt file
+RestaurantApp/src/main/resources/connection.txt
