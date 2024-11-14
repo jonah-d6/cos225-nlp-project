@@ -62,4 +62,22 @@ public class Database
       e.printStackTrace();
     }
   }
+
+  public static void deleteAllDocuments(String collectionName)
+  {
+    try(MongoClient mongoClient = MongoClients.create(connectionString))
+    {
+      MongoDatabase database = mongoClient.getDatabase(DBNAME);
+      MongoCollection<Document> reviewCollection =
+        database.getCollection(collectionName);
+
+      reviewCollection.deleteMany(new Document());
+    }
+    catch(Exception e)
+    {
+      System.out.println(
+        "An error has occured while deleting from the database.");
+      e.printStackTrace();
+    }
+  }
 }
