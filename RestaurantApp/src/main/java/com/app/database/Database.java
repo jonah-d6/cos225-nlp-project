@@ -64,7 +64,7 @@ public class Database
   }
 
   public static void deleteAllDocuments(String collectionName)
-  {
+  { //TODO: Make sure this method works
     try(MongoClient mongoClient = MongoClients.create(connectionString))
     {
       MongoDatabase database = mongoClient.getDatabase(DBNAME);
