@@ -1,6 +1,9 @@
 package com.app.review;
 
 import java.util.ArrayList;
+import java.util.Scanner;
+import org.bson.Document;
+import com.app.database.Database;
 
 public class Review {
 
@@ -71,6 +74,45 @@ public class Review {
         }
 
         return trimmedContents;
+    }
+
+    //Method to create Review objects via user input
+    public static Review createReview(){
+        try (Scanner scanner = new Scanner(System.in)){
+
+            System.out.println("Enter new review text:");
+            String reviewText = scanner.nextLine();
+
+            int rating = 0;
+            while (true) {
+                System.out.println("Enter rating (1-5):");
+                try{
+                    rating = Integer.parseInt(scanner.nextLine());
+                    if (rating >= 1 && rating <= 5){
+                        break; //exit if rating is valid
+                    } else {
+                        System.out.println("Invalid rating. Enter a number rating between 1 and 5");
+                    }
+                } catch(NumberFormatException e){
+                    System.out.println("Invalid input. Enter a number rating between 1 and 5");
+                }
+            }
+
+            //Determine if review is positive (>= 3)
+            boolean isPositive = rating >= 3;
+
+            //Process the review text and clean
+            ArrayList<String> contents = new ArrayList<>();
+            String[] words = reviewText.split(" ");
+            for(String word : words){
+                contents.add(word);
+            }
+
+            Review newReview = new Review(isPositive, contents);
+            newReview.setContents(newReview.trimContents());
+
+            return newReview;
+        }
     }
 
 }
