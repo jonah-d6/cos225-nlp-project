@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import org.bson.Document;
 import com.app.database.Database;
+import java.util.List;
 
 public class Review {
 
@@ -115,4 +116,19 @@ public class Review {
         }
     }
 
+    public void uploadToMongo(String collectionName){
+        try{
+            //Create new mongodb document from Review object
+            Document reviewDocument = new Document()
+                .append("isPositive", this.getIsPositive())
+                .append("contents", this.getContents());
+                
+            //upload using Database class
+            Database.upload(reviewDocument, collectionName);
+            System.out.println("Review successfully uploaded to MongoDB.");
+        } catch (Exception e){
+            System.out.println("An error occured while uploading to MongoDB");
+            e.printStackTrace();
+        }
+    }
 }
