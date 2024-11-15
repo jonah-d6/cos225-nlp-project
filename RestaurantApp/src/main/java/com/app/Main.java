@@ -1,5 +1,7 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import com.app.review.Review;
 
@@ -10,16 +12,33 @@ public class Main
     String fileName = "../../../resources/restaurant_reviews.csv";
     try(BufferedReader reader = new BufferedReader(new FileReader(fileName)))
     {
-      String line = reader.nextLine();
+      String line = reader.readLine();
+
+      //helper variables for the following loop
+      String reviewText;
       Review currentLine;
-      ArrayList<String> contents;
+      List<String> contentsAsList;
       int reviewScore;
+
       while (line != null)
       {
-        //TODO: fill up contents with the words in the review
-        //TODO: initialize reviewScore with the final value, separated by the comma
-        currentLine = (reviewScore, contents);
-        line = reader.nextLine();
+        reviewText = line.substring(0, line.length() - 2);
+
+        //splits the text over spaces and punctuation, and stores as a List
+        contentsAsList = Arrays.asList(reviewText.split("[\\p{Punct}\\s]+"));
+
+        //parses the final character of the line as an int
+        reviewScore = Integer.parseInt(line.substring(line.length() - 1));
+
+        //since the Review constructor takes a boolean, we need to turn our int into a boolean
+        if(reviewScore==0)
+          currentLine = new Review(false, new ArrayList<String>(contentsAsList));
+        else
+          currentLine = new Review(true, new ArrayList<String>(contentsAsList));
+
+        currentLine.uploadToMongo(""/*TODO: insert collection name here*/);
+
+        line = reader.readLine();
       }
     }
     catch(Exception e)
