@@ -9,6 +9,10 @@ import com.mongodb.client.MongoDatabase;
 
 import com.mongodb.client.model.Filters.*;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 public class Database
 {
   private String connectionString = "";
@@ -20,6 +24,16 @@ public class Database
   public static void main(String[] args)
   { //TODO: Remove main method once Database is finished
     System.out.println("main method for testing purposes only");
+  }
+
+  private static void initializeConnection(){
+    try(BufferedReader reader = new BufferedReader(new FileReader("connection.txt"))){
+      connectionString = reader.readLine().trim();
+      System.out.println("Connection string initialized");
+      } catch (IOException e) {
+        System.out.println("Error reading connection string from 'connection.txt'");
+        e.printStackTrace();
+      }
   }
 
   public static void upload(Document d, String collectionName)
