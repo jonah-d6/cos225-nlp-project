@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import org.bson.Document;
 import com.app.database.Database;
-import java.util.List;
 
 public class Review {
 

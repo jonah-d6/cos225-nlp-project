@@ -16,7 +16,6 @@ import java.io.IOException;
 public class Database
 {
   private String connectionString = "";
-  //TODO: Make text file and make functionality to read it for connectionString
 
   private final String DBNAME = "";
   //TODO: Initialize dbname
@@ -26,7 +25,7 @@ public class Database
     System.out.println("main method for testing purposes only");
   }
 
-  private static void initializeConnection(){
+  private void initializeConnection(){
     try(BufferedReader reader = new BufferedReader(new FileReader("connection.txt"))){
       connectionString = reader.readLine().trim();
       System.out.println("Connection string initialized");
