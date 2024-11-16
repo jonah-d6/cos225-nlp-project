@@ -15,10 +15,10 @@ import java.io.IOException;
 
 public class Database
 {
-  private String connectionString = "";
+  private static String connectionString = "";
   //TODO: Make text file and make functionality to read it for connectionString
 
-  private final String DBNAME = "";
+  private static final String DBNAME = "";
   //TODO: Initialize dbname
 
   public static void main(String[] args)
