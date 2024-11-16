@@ -16,18 +16,18 @@ import java.io.IOException;
 public class Database
 {
   private static String connectionString = "";
-  //TODO: Make text file and make functionality to read it for connectionString
 
-  private static final String DBNAME = "";
-  //TODO: Initialize dbname
+  private static final String DBNAME = "COS225NLP-Project";
 
   public static void main(String[] args)
   { //TODO: Remove main method once Database is finished
     System.out.println("main method for testing purposes only");
+    initializeConnection();
   }
 
   private static void initializeConnection(){
-    try(BufferedReader reader = new BufferedReader(new FileReader("connection.txt"))){
+    try(BufferedReader reader = new BufferedReader(new FileReader(
+            "src/main/resources/connection.txt"))){
       connectionString = reader.readLine().trim();
       System.out.println("Connection string initialized");
       } catch (IOException e) {
