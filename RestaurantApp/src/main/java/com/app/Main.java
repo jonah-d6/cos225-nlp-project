@@ -44,7 +44,7 @@ public class Main
         else
           currentLine = new Review(true, new ArrayList<String>(contentsAsList));
 
-        currentLine.uploadToMongo(""/*TODO: insert collection name here*/);
+        currentLine.uploadToMongo("test_reviews");
 
         line = reader.readLine();
       }
