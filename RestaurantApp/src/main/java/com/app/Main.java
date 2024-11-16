@@ -8,9 +8,13 @@ import com.app.review.Review;
 
 public class Main
 {
+  public static void main(String[] args)
+  {
+    startUp();
+  }
   private static void startUp()
   {
-    String fileName = "../../../resources/restaurant_reviews.csv";
+    String fileName = "src/main/resources/restaurant_reviews.csv";
     try(BufferedReader reader = new BufferedReader(new FileReader(fileName)))
     {
       String line = reader.readLine();
