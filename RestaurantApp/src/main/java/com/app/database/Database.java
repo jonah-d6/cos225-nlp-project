@@ -23,12 +23,6 @@ public class Database
 
   private static final String DBNAME = "COS225NLP-Project";
 
-  public static void main(String[] args)
-  { //TODO: Remove main method once Database is finished
-    System.out.println("main method for testing purposes only");
-    initializeConnection();
-  }
-
   public static void initializeConnection(){
     try(BufferedReader reader = new BufferedReader(new FileReader(
             "src/main/resources/connection.txt"))){
