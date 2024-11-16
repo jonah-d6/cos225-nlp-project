@@ -6,12 +6,16 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCursor;
 
 import com.mongodb.client.model.Filters.*;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Database
 {
@@ -26,7 +30,7 @@ public class Database
     System.out.println("main method for testing purposes only");
   }
 
-  private static void initializeConnection(){
+  private void initializeConnection(){
     try(BufferedReader reader = new BufferedReader(new FileReader("connection.txt"))){
       connectionString = reader.readLine().trim();
       System.out.println("Connection string initialized");
@@ -55,8 +59,9 @@ public class Database
     }
   }
 
-  public static Document read(String collectionName)
+  public static List<Document> read(String collectionName)
   {
+    List<Document> documents = new ArrayList<>();
     try(MongoClient mongoclient = MongoClients.create(connectionString))
     {
       MongoDatabase database = mongoclient.getDatabase(DBNAME);
@@ -64,10 +69,15 @@ public class Database
       MongoCollection<Document> reviewCollection =
         database.getCollection(collectionName);
 
-      Document firstDocument = reviewCollection.find().first();
-      //This code can only read the first entry. TODO: Find out how to read other entries
+      //get all documents
+      FindIterable<Document> iterable = reviewCollection.find();
+      MongoCursor<Document> cursor = iterable.iterator();
 
-      return firstDocument;
+      while(cursor.hasNext()){
+        Document doc = cursor.next();
+        documents.add(doc);
+      }
+      System.out.println("Sucessfully read all documents from collection");
     }
     catch(Exception e)
     {
@@ -76,6 +86,8 @@ public class Database
       e.printStackTrace();
       return new Document();
     }
+
+    return documents;
   }
 
   public static void deleteAllDocuments(String collectionName)
