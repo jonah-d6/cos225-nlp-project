@@ -5,15 +5,22 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.app.review.Review;
+import com.app.database.Database;
 
 public class Main
 {
+  public static void main(String[] args)
+  {
+    Database.initializeConnection();
+    startUp();
+  }
   private static void startUp()
   {
-    String fileName = "../../../resources/restaurant_reviews.csv";
+    String fileName = "src/main/resources/restaurant_reviews.csv";
     try(BufferedReader reader = new BufferedReader(new FileReader(fileName)))
     {
       String line = reader.readLine();
+      line = reader.readLine();//skips the header
 
       //helper variables for the following loop
       String reviewText;
@@ -37,7 +44,7 @@ public class Main
         else
           currentLine = new Review(true, new ArrayList<String>(contentsAsList));
 
-        currentLine.uploadToMongo(""/*TODO: insert collection name here*/);
+        currentLine.uploadToMongo("test_reviews");
 
         line = reader.readLine();
       }
