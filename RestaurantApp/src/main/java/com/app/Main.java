@@ -18,6 +18,7 @@ public class Main
     try(BufferedReader reader = new BufferedReader(new FileReader(fileName)))
     {
       String line = reader.readLine();
+      line = reader.readLine();//skips the header
 
       //helper variables for the following loop
       String reviewText;
