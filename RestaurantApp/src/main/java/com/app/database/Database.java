@@ -74,6 +74,7 @@ public class Database
       System.out.println(
         "An error has occured while reading from the database.");
       e.printStackTrace();
+      return new Document();
     }
   }
 
