@@ -13,6 +13,7 @@ public class Main
   {
     Database.initializeConnection();
     startUp();
+    Database.deleteAllDocuments("test_reviews");
   }
   private static void startUp()
   {
