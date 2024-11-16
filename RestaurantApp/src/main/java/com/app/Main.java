@@ -5,11 +5,13 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.app.review.Review;
+import com.app.database.Database;
 
 public class Main
 {
   public static void main(String[] args)
   {
+    Database.initializeConnection();
     startUp();
   }
   private static void startUp()

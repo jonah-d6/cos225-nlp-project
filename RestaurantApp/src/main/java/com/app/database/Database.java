@@ -29,10 +29,10 @@ public class Database
     initializeConnection();
   }
 
-  private static void initializeConnection(){
+  public static void initializeConnection(){
     try(BufferedReader reader = new BufferedReader(new FileReader(
             "src/main/resources/connection.txt"))){
-      connectionString = reader.readLine().trim();
+      connectionString = reader.readLine();
       System.out.println("Connection string initialized");
       } catch (IOException e) {
         System.out.println("Error reading connection string from 'connection.txt'");
