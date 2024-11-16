@@ -124,7 +124,6 @@ public class Review {
                 
             //upload using Database class
             Database.upload(reviewDocument, collectionName);
-            System.out.println("Review successfully uploaded to MongoDB.");
         } catch (Exception e){
             System.out.println("An error occured while uploading to MongoDB");
             e.printStackTrace();
