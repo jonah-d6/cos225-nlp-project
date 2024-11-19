@@ -3,7 +3,7 @@
 COS 225
 Names: Dylan Alvord, JT Kearns, Jonah Dean
 Date: 10.25.2024
-Dataset Link: https://huggingface.co/datasets/pachequinho/restaurant_reviews
+Dataset Links: https://huggingface.co/datasets/pachequinho/restaurant_reviews, https://www.kaggle.com/datasets/farukalam/yelp-restaurant-reviews
 
 Problem: Our project addresses classification, where restaurant reviews are automatically classified as either positive or negative based on the content of the review. This will help to identify/evaluate customer satisfaction, as well as identify potential improvements that may need to be made.
 
