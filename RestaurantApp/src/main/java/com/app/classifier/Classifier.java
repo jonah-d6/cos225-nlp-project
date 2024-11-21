@@ -1,4 +1,4 @@
-package com.app.classifier
+package com.app.classifier;
 
 public class Classifier
 {
