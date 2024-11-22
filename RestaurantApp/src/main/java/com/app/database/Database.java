@@ -19,19 +19,14 @@ import java.util.List;
 
 public class Database
 {
-  private String connectionString = "";
+  private static String connectionString = "";
 
-  private final String DBNAME = "";
-  //TODO: Initialize dbname
+  private static final String DBNAME = "COS225NLP-Project";
 
-  public static void main(String[] args)
-  { //TODO: Remove main method once Database is finished
-    System.out.println("main method for testing purposes only");
-  }
-
-  private void initializeConnection(){
-    try(BufferedReader reader = new BufferedReader(new FileReader("connection.txt"))){
-      connectionString = reader.readLine().trim();
+  public static void initializeConnection(){
+    try(BufferedReader reader = new BufferedReader(new FileReader(
+            "src/main/resources/connection.txt"))){
+      connectionString = reader.readLine();
       System.out.println("Connection string initialized");
       } catch (IOException e) {
         System.out.println("Error reading connection string from 'connection.txt'");
@@ -83,6 +78,7 @@ public class Database
       System.out.println(
         "An error has occured while reading from the database.");
       e.printStackTrace();
+      return new ArrayList<Document>();
     }
 
     return documents;
