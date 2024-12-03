@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class Menu {
     private static List<Review> reviews = new ArrayList<>();
-    private static Scanner scanner = new Scanner(System.in);
+    public final static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
         while (true) {
