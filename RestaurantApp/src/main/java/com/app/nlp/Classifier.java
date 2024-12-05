@@ -30,5 +30,17 @@ public class Classifier
     else
       updateWordCount(negativeWordCount, words);
   }
+
+  private void updateWordCount(HashMap<String, Integer> wordCount, ArrayList<String> words)
+  {
+    for (String word : words)
+    {
+      if (wordCount.containsKey(word))
+        wordCount.put(word, wordCount.get(word) + 1);
+      else
+        wordCount.put(word, 1);
+      vocabulary.add(word);
+    }
+  }
   
 }
