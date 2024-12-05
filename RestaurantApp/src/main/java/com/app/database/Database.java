@@ -23,6 +23,11 @@ public class Database
 
   private static final String DBNAME = "COS225NLP-Project";
 
+  /**
+   * initializeConnection() gets the connection string from .txt file
+   * It kicks an error if the file is not found or the connection is not successful
+   * If sucessful, it will initialize the connection string into a string attribute
+   */
   public static void initializeConnection(){
     try(BufferedReader reader = new BufferedReader(new FileReader(
             "src/main/resources/connection.txt"))){
@@ -34,6 +39,15 @@ public class Database
       }
   }
 
+  /**
+   * upload() handles the uploading to MongoDB after the connection string has been initialized
+   * 
+   * @param document d - Review obj
+   * @param String collectionName
+   * 
+   * This will initialize the data collection in MongoDB with the provided collectionName
+   * This will also upload a Review object to MongoDB and is called in the uploadToMongo() in the Review class
+   */
   public static void upload(Document d, String collectionName)
   {
     try(MongoClient mongoclient = MongoClients.create(connectionString))
@@ -52,6 +66,15 @@ public class Database
       e.printStackTrace();
     }
   }
+
+  /**
+   * read() utilizes the connectionString attribute to connect with MongoDB
+   * 
+   * @param collectionName
+   * @return
+   * 
+   * This method will read reviews from the MongoDB data and store them in an array
+   */
 
   public static List<Document> read(String collectionName)
   {
@@ -84,8 +107,16 @@ public class Database
     return documents;
   }
 
+  /**
+   * deleteAllDocument() also uses the connectionString atrribute to connect with MongoDB
+   * 
+   * @param collectionName
+   * 
+   * This method connects with MongoDB and will remove data from the database
+   */
+
   public static void deleteAllDocuments(String collectionName)
-  { //TODO: Make sure this method works
+  { 
     try(MongoClient mongoClient = MongoClients.create(connectionString))
     {
       MongoDatabase database = mongoClient.getDatabase(DBNAME);
@@ -96,8 +127,7 @@ public class Database
     }
     catch(Exception e)
     {
-      System.out.println(
-        "An error has occured while deleting from the database.");
+      System.out.println("An error has occured while deleting from the database.");
       e.printStackTrace();
     }
   }
