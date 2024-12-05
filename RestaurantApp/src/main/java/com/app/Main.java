@@ -6,9 +6,13 @@ import java.util.List;
 
 import com.app.review.Review;
 import com.app.database.Database;
+import com.app.nlp.Classifier;
 
 public class Main
 {
+
+  private Classifier classifier = new Classifier(/*TODO:Insert whatever constructor it takes here*/);
+
   public static void main(String[] args)
   {
     Database.initializeConnection();
@@ -44,6 +48,8 @@ public class Main
           currentLine = new Review(false, new ArrayList<String>(contentsAsList));
         else
           currentLine = new Review(true, new ArrayList<String>(contentsAsList));
+
+        classifier.updateTraining(currentLine);
 
         currentLine.uploadToMongo("test_reviews");
 
