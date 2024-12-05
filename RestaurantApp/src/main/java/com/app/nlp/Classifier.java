@@ -3,6 +3,8 @@ package com.app.nlp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Arrays;
+import java.util.List;
 
 public class Classifier
 {
@@ -20,6 +22,13 @@ public class Classifier
 
   public Classifier()
   {
+    //TODO: Determine whether or not items in classifier should be static
+  }
+
+  public boolean classify(String text)
+  {
+    List<String> contentsAsList = Arrays.asList(reviewText.split("[\\p{Punct}\\s]+"));
+    //TODO: finish classify method
   }
 
   public void updateTraining(Review trainer)
