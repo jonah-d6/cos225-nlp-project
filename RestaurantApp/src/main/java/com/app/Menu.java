@@ -9,6 +9,12 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+/**
+ * The Menu class is the main frontend functionality for the app
+ * It displays the menu to the user and allows for the navigation of it
+ * It calls functions from the other files as needed per the menu selection
+ */
+
 public class Menu {
     private static List<Review> reviews = new ArrayList<>();
     public final static Scanner scanner = new Scanner(System.in);
@@ -39,7 +45,9 @@ public class Menu {
             }
         }
     }
-
+    /**
+     * showMenu() is a simple function to display the menu options to the user
+     */
     private static void showMenu() {
         System.out.println("\n=== Menu ===");
         System.out.println("1. View and manage reviews");
@@ -50,6 +58,14 @@ public class Menu {
         System.out.print("Enter your choice: ");
     }
 
+    /**
+     * getUserInput() gets the user input from terminal
+     * 
+     * @return int - user selection
+     * 
+     * Called in main for user menu navigation
+     */
+
     private static int getUserInput() {
         while (true) {
             try {
@@ -59,6 +75,13 @@ public class Menu {
             }
         }
     }
+
+    /**
+     * viewAndManageReviews() runs after one selection of the menu and displays a menu of its own
+     * 
+     * Has functionality of calling functions in the Review class to get and display the attributes of a review
+     * Also has functionality to add a new Review object via user input
+     */
 
     private static void viewAndManageReviews() {
         System.out.println("\n=== View and Manage Reviews ===");
@@ -72,20 +95,34 @@ public class Menu {
             }
         }
 
-        System.out.println("\n1. Add new review");
-        System.out.println("2. Go back to the main menu");
+        System.out.println("\n1. Add new review with rating");
+        System.out.println("2. Add new review with rating prediction");
+        System.out.println("3. Go back to the main menu");
         System.out.print("Enter your choice: ");
         int choice = getUserInput();
         if (choice == 1) {
             addNewReview();
+        }else if (choice == 2){
+            assert true;
+            //TODO:call function from Classifier class (does not exist yet)
         }
     }
+
+    /**
+     * addNewReview() adds a new review via user input to the reviews array list attribute of Menu
+     */
 
     private static void addNewReview() {
         Review newReview = Review.createReview();
         reviews.add(newReview);
         System.out.println("Review added successfully!");
     }
+
+    /**
+     * uploadReviews() acts as a "sub-menu" for one of the main menu selections
+     * 
+     * inlcudes options to upload reviews to the csv file, or MongoDB
+     */
 
     private static void uploadReviews() {
         System.out.println("\n=== Upload Reviews ===");
@@ -107,6 +144,11 @@ public class Menu {
         // Example: Use a CSV library like OpenCSV or write a custom method to write reviews to a CSV file.
     }
 
+    /**
+     * uploadToDatabase() calls the functions initialize connection and upload to MongoDB
+     * It will upload the current Reviews in the arraylist reviews attribute of Menu to MongoDB
+     */
+
     private static void uploadToDatabase() {
         System.out.println("Uploading reviews to MongoDB...");
         Database.initializeConnection();
@@ -115,6 +157,11 @@ public class Menu {
         }
         System.out.println("Reviews uploaded to MongoDB successfully!");
     }
+
+    /**
+     * sortAndFilterReviews() is also a "sub-menu" that the user can navigate to
+     * Similarly to the other menus and sub-menus, the user is given options and can choose them
+     */
 
     private static void sortAndFilterReviews() {
         System.out.println("\n=== Sort and Filter Reviews ===");
@@ -131,12 +178,23 @@ public class Menu {
         }
     }
 
+    /**
+     * sortReviewsByRating() will sort the reviews based on the 1-5 rating in descending order.
+     * It will then display the reviews in the sorted order to the user.
+     */
+
     private static void sortReviewsByRating() {
         System.out.println("\nSorting reviews by rating...");
         reviews.sort(Comparator.comparing(Review::getIsPositive).reversed()); // Sort by rating, positive reviews first
         System.out.println("Reviews sorted successfully!");
         viewAndManageReviews(); // View reviews after sorting
     }
+
+    /**
+     * filterReviewsByKeyword() will allow the user to input a word to search for reviews containing it
+     * If no reviews are found with the chosen word, it will inform the user of that
+     * If reviews are found with the keyword, they will be displayed to the user
+     */
 
     private static void filterReviewsByKeyword() {
         System.out.print("\nEnter the keyword to filter reviews: ");
@@ -156,6 +214,12 @@ public class Menu {
             }
         }
     }
+
+    /**
+     * initializeDataBaseConnection() connects the program to MongoDB
+     * This is done by calling the initializeConnection() function in the Database object
+     * This should be used before attempting to make any uploads to MongoDB
+     */
 
     private static void initializeDatabaseConnection() {
         System.out.println("\nInitializing database connection...");
