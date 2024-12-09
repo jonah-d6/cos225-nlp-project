@@ -60,7 +60,7 @@ public class Main
       {
         //THE FOLLOWING IS FOR TEST OF 10 LINES
         
-        if (i >= 10)
+        if (i >= 100)
           break;
         i++;
         
@@ -82,7 +82,7 @@ public class Main
 
         Classifier.updateTraining(currentLine);
 
-        currentLine.uploadToMongo("test_reviews");
+        currentLine.uploadToMongo("reviews");
 
         line = reader.readLine();
       }

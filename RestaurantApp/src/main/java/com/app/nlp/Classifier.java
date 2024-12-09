@@ -44,9 +44,16 @@ public class Classifier
   {
     ArrayList<String> words = trainer.trimContents();
     if (trainer.getIsPositive())
+    {
       updateWordCount(positiveWordCount, words);
+      numPositiveReviews++;
+    }
     else
+    {
       updateWordCount(negativeWordCount, words);
+      numNegativeReviews++;
+    }
+    numTotalReviews++;
   }
 
   public static void finalizeTraining()
