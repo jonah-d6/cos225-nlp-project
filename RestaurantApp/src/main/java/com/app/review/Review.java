@@ -19,12 +19,13 @@ public class Review {
     private boolean isPositive;
     private ArrayList<String> contents;
 
+    public static String[] STOP_WORDS = {
+
     /**
      * The STOP_WORDS constant is a list of words that are deemed "stop words"
      * These words are deemed to be unimportant to the process of determining the positivity of a review
      */
 
-    public String[] STOP_WORDS = {
         "i", "me", "my", "myself", "we", "our", "ours", "ourselves", "you", 
         "your", "yours", "yourself", "yourselves", "he", "him", "his", "himself", 
         "she", "her", "hers", "herself", "it", "its", "itself", "they", "them", 
@@ -65,6 +66,7 @@ public class Review {
         contents.add(word);
     }
 
+    public static boolean isStopWord(String word){
     /**
      * isStopWord() is a fucntion to be called within the function that trims the stopwords from contents
      * 
@@ -74,8 +76,6 @@ public class Review {
      * The function takes in an indiviual string and determines if it is in the list of stopwords
      * The function returns a boolean value based on the determiniation
      */
-
-    protected boolean isStopWord(String word){
         for(String stopWord : STOP_WORDS){
             if(stopWord.equals(word)){
                 return true;

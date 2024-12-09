@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.app.review.Review;
 import com.app.database.Database;
+import com.app.nlp.Classifier;
 
 /**
  * The Main class holds the functions to start up the program
@@ -15,6 +16,7 @@ import com.app.database.Database;
 
 public class Main
 {
+
   /**
    * Initializes the connection to the database using the function from Database
    * 
@@ -22,17 +24,20 @@ public class Main
    * 
    * Starts up the program
    */
+
   public static void main(String[] args)
   {
     Database.initializeConnection();
     startUp();
-    Database.deleteAllDocuments("test_reviews");
+    Classifier.finalizeTraining();
   }
+
 
   /**
    * startUp() initializes the review data from the .csv and uses the info to initialize Review objects
    * It then uploads them to MongoDB via the function in Review
    */
+
 
   private static void startUp()
   {
@@ -48,8 +53,18 @@ public class Main
       List<String> contentsAsList;
       int reviewScore;
 
+      int i = 0; //TESTING PURPOSE COUNTER ONLY
+                 
       while (line != null)
       {
+        //THE FOLLOWING IS FOR TEST OF 10 LINES
+        
+        if (i >= 10)
+          break;
+        i++;
+        
+        //END OF TESTING CODE
+
         reviewText = line.substring(0, line.length() - 2);
 
         //splits the text over spaces and punctuation, and stores as a List
@@ -63,6 +78,8 @@ public class Main
           currentLine = new Review(false, new ArrayList<String>(contentsAsList));
         else
           currentLine = new Review(true, new ArrayList<String>(contentsAsList));
+
+        Classifier.updateTraining(currentLine);
 
         currentLine.uploadToMongo("test_reviews");
 
