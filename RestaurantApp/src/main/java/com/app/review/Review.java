@@ -1,11 +1,8 @@
 package com.app.review;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 import org.bson.Document;
 import com.app.database.Database;
-import com.app.Menu;
-
 import com.app.Menu;
 
 /**
