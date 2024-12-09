@@ -9,8 +9,6 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCursor;
 
-import com.mongodb.client.model.Filters.*;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
