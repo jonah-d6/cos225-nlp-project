@@ -52,7 +52,7 @@ public class Review {
         contents.add(word);
     }
 
-    protected boolean isStopWord(String word){
+    public static boolean isStopWord(String word){
         for(String stopWord : STOP_WORDS){
             if(stopWord.equals(word)){
                 return true;

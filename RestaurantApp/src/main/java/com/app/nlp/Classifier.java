@@ -27,7 +27,8 @@ public class Classifier
 
   public boolean classify(String text)
   {
-    List<String> contentsAsList = Arrays.asList(reviewText.split("[\\p{Punct}\\s]+"));
+    List<String> contentsAsList = Arrays.asList(text.split("[\\p{Punct}\\s]+"));
+    contentsAsList = trim(contentsAsList);
     //TODO: finish classify method
   }
 
@@ -50,6 +51,22 @@ public class Classifier
         wordCount.put(word, 1);
       vocabulary.add(word);
     }
+  }
+
+  private ArrayList<String> trim(List<String> words){
+    ArrayList<String> trimmedContents = new ArrayList<>();
+
+    for(String word : words) {
+      //remove punctuation
+      String checkedWord = word.replaceAll("[^a-zA-Z]", "").toLowerCase();
+
+      //add to trimmed list if not stop word and empty
+      if(!checkedWord.isEmpty() && !isStopWord(checkedWord)){
+        trimmedContents.add(checkedWord);
+      }
+    }
+
+    return trimmedContents;
   }
   
 }
