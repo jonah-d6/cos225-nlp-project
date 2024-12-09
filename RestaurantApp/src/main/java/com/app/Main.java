@@ -30,6 +30,7 @@ public class Main
     Database.initializeConnection();
     startUp();
     Classifier.finalizeTraining();
+    Menu.menu();
   }
 
 
