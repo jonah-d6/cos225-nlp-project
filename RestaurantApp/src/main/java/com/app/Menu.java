@@ -38,6 +38,9 @@ public class Menu {
                     initializeDatabaseConnection();
                     break;
                 case 5:
+                    deleteDocuments();
+                    break;
+                case 6:
                     System.out.println("Exiting...");
                     System.exit(0);
                     break;
@@ -55,7 +58,8 @@ public class Menu {
         System.out.println("2. Upload reviews to a destination (CSV or database)");
         System.out.println("3. Sort and filter reviews based on rating or keywords");
         System.out.println("4. Initialize database connection");
-        System.out.println("5. Exit");
+        System.out.println("5. Delete reviews from database");
+        System.out.println("6. Exit");
         System.out.print("Enter your choice: ");
     }
 
@@ -104,7 +108,6 @@ public class Menu {
         if (choice == 1) {
             addNewReview();
         }else if (choice == 2){
-            assert true;
             System.out.println("\nWhat is the text of your review?");
             System.out.print("Enter text: ");
             String reviewText = scanner.nextLine();
@@ -237,5 +240,11 @@ public class Menu {
         System.out.println("\nInitializing database connection...");
         Database.initializeConnection();
         System.out.println("Database connection initialized successfully!");
+    }
+
+    private static void deleteDocuments()
+    {
+      Database.deleteAllDocuments("reviews");
+      System.out.println("\nReviews deleted from the MongoDB database.");
     }
 }
