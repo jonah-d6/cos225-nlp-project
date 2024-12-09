@@ -29,6 +29,7 @@ public class Classifier
   {
     List<String> contentsAsList = Arrays.asList(text.split("[\\p{Punct}\\s]+"));
     contentsAsList = trim(contentsAsList);
+
     //TODO: finish classify method
   }
 
@@ -61,7 +62,7 @@ public class Classifier
       String checkedWord = word.replaceAll("[^a-zA-Z]", "").toLowerCase();
 
       //add to trimmed list if not stop word and empty
-      if(!checkedWord.isEmpty() && !isStopWord(checkedWord)){
+      if(!checkedWord.isEmpty() && !Review.isStopWord(checkedWord)){
         trimmedContents.add(checkedWord);
       }
     }
