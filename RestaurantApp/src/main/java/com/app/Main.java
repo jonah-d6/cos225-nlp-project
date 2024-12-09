@@ -32,8 +32,18 @@ public class Main
       List<String> contentsAsList;
       int reviewScore;
 
+      int i = 0; //TESTING PURPOSE COUNTER ONLY
+                 
       while (line != null)
       {
+        //THE FOLLOWING IS FOR TEST OF 10 LINES
+        
+        if (i >= 10)
+          break;
+        i++;
+        
+        //END OF TESTING CODE
+
         reviewText = line.substring(0, line.length() - 2);
 
         //splits the text over spaces and punctuation, and stores as a List
