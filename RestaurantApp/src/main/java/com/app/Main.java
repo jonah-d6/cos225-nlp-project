@@ -8,8 +8,22 @@ import com.app.review.Review;
 import com.app.database.Database;
 import com.app.nlp.Classifier;
 
+/**
+ * The Main class holds the functions to start up the program
+ * 
+ * It has no attributes
+ */
+
 public class Main
 {
+
+  /**
+   * Initializes the connection to the database using the function from Database
+   * 
+   * @param args
+   * 
+   * Starts up the program
+   */
 
   public static void main(String[] args)
   {
@@ -17,6 +31,13 @@ public class Main
     startUp();
     Classifier.finalizeTraining();
   }
+
+
+  /**
+   * startUp() initializes the review data from the .csv and uses the info to initialize Review objects
+   * It then uploads them to MongoDB via the function in Review
+   */
+
 
   private static void startUp()
   {
