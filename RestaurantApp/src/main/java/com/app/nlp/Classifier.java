@@ -54,6 +54,33 @@ public class Classifier
       updateWordCount(negativeWordCount, words);
   }
 
+  public void finalizeTraining()
+  {
+    int totalPositiveWords = positiveWordCount.values().stream().mapToInt(Integer::intValue).sum();
+    int totalNegativeWords = negativeWordCount.values().stream().mapToInt(Integer::intValue).sum();
+
+    for (String word : vocabulary)
+    {
+      double positiveProbability = calculateProbability(word, positiveWordCount, totalPositiveWords);
+      double negativeProbability = calculateProbability(word, negativeWordCount, totalNegativeWords);
+
+      positiveProbabilities.put(word, positiveProbability);
+      negativeProbabilities.put(word, negativeProbability);
+    }
+  }
+
+  private double calculateProbability(String word, HashMap<String, Integer> wordCount, int totalWords)
+  {
+    if (wordCount.containsKey(word))
+    {
+      return (double) wordCount.get(word) / totalWords;
+    }
+    else
+    {
+      return 1.0 / (totalWords + vocabulary.size());
+    }
+  }
+
   private void updateWordCount(HashMap<String, Integer> wordCount, ArrayList<String> words)
   {
     for (String word : words)
