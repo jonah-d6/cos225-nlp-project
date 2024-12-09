@@ -31,3 +31,4 @@ replay_pid*
 
 # Connection String txt file
 RestaurantApp/src/main/resources/connection.txt
+RestaurantApp/src/main/java/com/app/deleter/Deleter.java
