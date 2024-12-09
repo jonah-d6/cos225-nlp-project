@@ -1,10 +1,8 @@
 package com.app.review;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 import org.bson.Document;
 import com.app.database.Database;
-
 import com.app.Menu;
 
 /**
@@ -18,12 +16,13 @@ public class Review {
     private boolean isPositive;
     private ArrayList<String> contents;
 
+    public static String[] STOP_WORDS = {
+
     /**
      * The STOP_WORDS constant is a list of words that are deemed "stop words"
      * These words are deemed to be unimportant to the process of determining the positivity of a review
      */
 
-    public String[] STOP_WORDS = {
         "i", "me", "my", "myself", "we", "our", "ours", "ourselves", "you", 
         "your", "yours", "yourself", "yourselves", "he", "him", "his", "himself", 
         "she", "her", "hers", "herself", "it", "its", "itself", "they", "them", 
@@ -64,6 +63,7 @@ public class Review {
         contents.add(word);
     }
 
+    public static boolean isStopWord(String word){
     /**
      * isStopWord() is a fucntion to be called within the function that trims the stopwords from contents
      * 
@@ -73,8 +73,6 @@ public class Review {
      * The function takes in an indiviual string and determines if it is in the list of stopwords
      * The function returns a boolean value based on the determiniation
      */
-
-    protected boolean isStopWord(String word){
         for(String stopWord : STOP_WORDS){
             if(stopWord.equals(word)){
                 return true;
@@ -116,41 +114,38 @@ public class Review {
      * The provided inputs are turned into a new Review object which is returned
      */
     public static Review createReview(){
-        try (Scanner scanner = new Scanner(System.in)){
+        System.out.println("Enter new review text:");
+        String reviewText = Menu.scanner.nextLine();
 
-            System.out.println("Enter new review text:");
-            String reviewText = scanner.nextLine();
-
-            int rating = 0;
-            while (true) {
-                System.out.println("Enter rating (1-5):");
-                try{
-                    rating = Integer.parseInt(scanner.nextLine());
-                    if (rating >= 1 && rating <= 5){
-                        break; //exit if rating is valid
-                    } else {
-                        System.out.println("Invalid rating. Enter a number rating between 1 and 5");
-                    }
-                } catch(NumberFormatException e){
-                    System.out.println("Invalid input. Enter a number rating between 1 and 5");
+        int rating = 0;
+        while (true) {
+            System.out.println("Enter rating (1-5):");
+            try{
+                rating = Integer.parseInt(Menu.scanner.nextLine());
+                if (rating >= 1 && rating <= 5){
+                    break; //exit if rating is valid
+                } else {
+                    System.out.println("Invalid rating. Enter a number rating between 1 and 5");
                 }
+            } catch(NumberFormatException e){
+                System.out.println("Invalid input. Enter a number rating between 1 and 5");
             }
-
-            //Determine if review is positive (>= 3)
-            boolean isPositive = rating >= 3;
-
-            //Process the review text and clean
-            ArrayList<String> contents = new ArrayList<>();
-            String[] words = reviewText.split(" ");
-            for(String word : words){
-                contents.add(word);
-            }
-
-            Review newReview = new Review(isPositive, contents);
-            newReview.setContents(newReview.trimContents());
-
-            return newReview;
         }
+
+        //Determine if review is positive (>= 3)
+        boolean isPositive = rating >= 3;
+
+        //Process the review text and clean
+        ArrayList<String> contents = new ArrayList<>();
+        String[] words = reviewText.split(" ");
+        for(String word : words){
+            contents.add(word);
+        }
+
+        Review newReview = new Review(isPositive, contents);
+        newReview.setContents(newReview.trimContents());
+
+        return newReview;
     }
 
     /**
