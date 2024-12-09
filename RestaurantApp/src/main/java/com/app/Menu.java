@@ -2,6 +2,7 @@ package com.app;
 
 import com.app.database.Database;
 import com.app.review.Review;
+import com.app.nlp.Classifier;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -19,7 +20,7 @@ public class Menu {
     private static List<Review> reviews = new ArrayList<>();
     public final static Scanner scanner = new Scanner(System.in);
 
-    public static void main(String[] args) {
+    public static void menu() {
         while (true) {
             showMenu();
             int choice = getUserInput();
@@ -104,7 +105,18 @@ public class Menu {
             addNewReview();
         }else if (choice == 2){
             assert true;
-            //TODO:call function from Classifier class (does not exist yet)
+            System.out.println("\nWhat is the text of your review?");
+            System.out.print("Enter text: ");
+            String reviewText = scanner.nextLine();
+            boolean isPositiveReview = Classifier.classify(reviewText);
+            if (isPositiveReview)
+            {
+              System.out.println("This review is positive.");
+            }
+            else
+            {
+              System.out.println("This review is negative.");
+            }
         }
     }
 

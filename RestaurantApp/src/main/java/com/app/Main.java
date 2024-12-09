@@ -30,6 +30,7 @@ public class Main
     Database.initializeConnection();
     startUp();
     Classifier.finalizeTraining();
+    Menu.menu();
   }
 
 
@@ -57,9 +58,9 @@ public class Main
                  
       while (line != null)
       {
-        //THE FOLLOWING IS FOR TEST OF 10 LINES
+        //THE FOLLOWING IS FOR TEST OF 100 LINES
         
-        if (i >= 10)
+        if (i >= 100)
           break;
         i++;
         
@@ -81,7 +82,7 @@ public class Main
 
         Classifier.updateTraining(currentLine);
 
-        currentLine.uploadToMongo("test_reviews");
+        currentLine.uploadToMongo("reviews");
 
         line = reader.readLine();
       }
