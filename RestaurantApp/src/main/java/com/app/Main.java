@@ -58,7 +58,7 @@ public class Main
                  
       while (line != null)
       {
-        //THE FOLLOWING IS FOR TEST OF 10 LINES
+        //THE FOLLOWING IS FOR TEST OF 100 LINES
         
         if (i >= 100)
           break;

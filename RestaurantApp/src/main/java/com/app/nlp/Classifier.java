@@ -24,7 +24,6 @@ public class Classifier
 
   public static boolean classify(String text)
   {
-    //TODO: Ensure classify method works properly/without error
     List<String> contentsAsList = Arrays.asList(text.split("[\\p{Punct}\\s]+"));
     contentsAsList = trim(contentsAsList);
 
