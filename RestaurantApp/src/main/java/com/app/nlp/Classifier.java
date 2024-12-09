@@ -6,27 +6,23 @@ import java.util.HashSet;
 import java.util.Arrays;
 import java.util.List;
 
+import com.app.review.Review;
+
 public class Classifier
 {
-  private HashSet<String> vocabulary = new HashSet<>();
+  private static HashSet<String> vocabulary = new HashSet<>();
 
-  private int numPositiveReviews = 0;
-  private int numNegativeReviews = 0;
-  private int numTotalReviews = 0;
+  private static int numPositiveReviews = 0;
+  private static int numNegativeReviews = 0;
+  private static int numTotalReviews = 0;
 
-  private HashMap<String, Integer> positiveWordCount = new HashMap<>();
-  private HashMap<String, Integer> negativeWordCount = new HashMap<>();
+  private static HashMap<String, Integer> positiveWordCount = new HashMap<>();
+  private static HashMap<String, Integer> negativeWordCount = new HashMap<>();
 
-  private HashMap<String, Double> positiveProbabilites = new HashMap<>();
-  private HashMap<String, Double> negativeProbabilites = new HashMap<>();
+  private static HashMap<String, Double> positiveProbabilities = new HashMap<>();
+  private static HashMap<String, Double> negativeProbabilities = new HashMap<>();
 
-  public Classifier()
-  {
-    //TODO: Determine whether or not items in classifier should be static
-    //TODO: Ensure to call all the proper classes in Main.java
-  }
-
-  public boolean classify(String text)
+  public static boolean classify(String text)
   {
     //TODO: Ensure classify method works properly/without error
     List<String> contentsAsList = Arrays.asList(text.split("[\\p{Punct}\\s]+"));
@@ -37,25 +33,23 @@ public class Classifier
 
     for (String word : contentsAsList)
     {
-      positiveScore += Math.log(positiveProbablities.getOrDefault(word, 1.0 / (positiveWordCount.size() + vocabulary.size())));
-    {
-      negativeScore += Math.log(negativeProbablities.getOrDefault(word, 1.0 / (negativeWordCount.size() + vocabulary.size())));
+      positiveScore += Math.log(positiveProbabilities.getOrDefault(word, 1.0 / (positiveWordCount.size() + vocabulary.size())));
+      negativeScore += Math.log(negativeProbabilities.getOrDefault(word, 1.0 / (negativeWordCount.size() + vocabulary.size())));
     }
 
-    return (positiveScore >= negativeScore)
+    return (positiveScore >= negativeScore);
   }
 
-  public void updateTraining(Review trainer)
+  public static void updateTraining(Review trainer)
   {
     ArrayList<String> words = trainer.trimContents();
-    if (review.getIsPositive())
+    if (trainer.getIsPositive())
       updateWordCount(positiveWordCount, words);
     else
       updateWordCount(negativeWordCount, words);
   }
 
-  public void finalizeTraining()
-  {
+  public static void finalizeTraining()
     int totalPositiveWords = positiveWordCount.values().stream().mapToInt(Integer::intValue).sum();
     int totalNegativeWords = negativeWordCount.values().stream().mapToInt(Integer::intValue).sum();
 
@@ -69,7 +63,7 @@ public class Classifier
     }
   }
 
-  private double calculateProbability(String word, HashMap<String, Integer> wordCount, int totalWords)
+  private static double calculateProbability(String word, HashMap<String, Integer> wordCount, int totalWords)
   {
     if (wordCount.containsKey(word))
     {
@@ -81,7 +75,7 @@ public class Classifier
     }
   }
 
-  private void updateWordCount(HashMap<String, Integer> wordCount, ArrayList<String> words)
+  private static void updateWordCount(HashMap<String, Integer> wordCount, ArrayList<String> words)
   {
     for (String word : words)
     {
@@ -93,7 +87,7 @@ public class Classifier
     }
   }
 
-  private ArrayList<String> trim(List<String> words){
+  private static ArrayList<String> trim(List<String> words){
     ArrayList<String> trimmedContents = new ArrayList<>();
 
     for(String word : words) {

@@ -11,14 +11,13 @@ import com.app.nlp.Classifier;
 public class Main
 {
 
-  private Classifier classifier = new Classifier(/*TODO:Insert whatever constructor it takes here*/);
-
   public static void main(String[] args)
   {
     Database.initializeConnection();
     startUp();
     Database.deleteAllDocuments("test_reviews");
   }
+
   private static void startUp()
   {
     String fileName = "src/main/resources/restaurant_reviews.csv";
@@ -49,7 +48,7 @@ public class Main
         else
           currentLine = new Review(true, new ArrayList<String>(contentsAsList));
 
-        classifier.updateTraining(currentLine);
+        Classifier.updateTraining(currentLine);
 
         currentLine.uploadToMongo("test_reviews");
 

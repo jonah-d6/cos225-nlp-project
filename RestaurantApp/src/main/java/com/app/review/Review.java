@@ -11,7 +11,7 @@ public class Review {
     private boolean isPositive;
     private ArrayList<String> contents;
 
-    public String[] STOP_WORDS = {
+    public static String[] STOP_WORDS = {
         "i", "me", "my", "myself", "we", "our", "ours", "ourselves", "you", 
         "your", "yours", "yourself", "yourselves", "he", "him", "his", "himself", 
         "she", "her", "hers", "herself", "it", "its", "itself", "they", "them", 
