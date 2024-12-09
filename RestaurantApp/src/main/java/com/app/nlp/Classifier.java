@@ -50,6 +50,7 @@ public class Classifier
   }
 
   public static void finalizeTraining()
+  {
     int totalPositiveWords = positiveWordCount.values().stream().mapToInt(Integer::intValue).sum();
     int totalNegativeWords = negativeWordCount.values().stream().mapToInt(Integer::intValue).sum();
 
@@ -102,5 +103,4 @@ public class Classifier
 
     return trimmedContents;
   }
-  
 }
