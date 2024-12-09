@@ -23,14 +23,26 @@ public class Classifier
   public Classifier()
   {
     //TODO: Determine whether or not items in classifier should be static
+    //TODO: Ensure to call all the proper classes in Main.java
   }
 
   public boolean classify(String text)
   {
+    //TODO: Ensure classify method works properly/without error
     List<String> contentsAsList = Arrays.asList(text.split("[\\p{Punct}\\s]+"));
     contentsAsList = trim(contentsAsList);
 
-    //TODO: finish classify method
+    double positiveScore = Math.log((double) numPositiveReviews / numTotalReviews);
+    double negativeScore = Math.log((double) numNegativeReviews / numTotalReviews);
+
+    for (String word : contentsAsList)
+    {
+      positiveScore += Math.log(positiveProbablities.getOrDefault(word, 1.0 / (positiveWordCount.size() + vocabulary.size())));
+    {
+      negativeScore += Math.log(negativeProbablities.getOrDefault(word, 1.0 / (negativeWordCount.size() + vocabulary.size())));
+    }
+
+    return (positiveScore >= negativeScore)
   }
 
   public void updateTraining(Review trainer)
