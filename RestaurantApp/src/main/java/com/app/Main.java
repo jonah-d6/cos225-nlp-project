@@ -15,7 +15,7 @@ public class Main
   {
     Database.initializeConnection();
     startUp();
-    Database.deleteAllDocuments("test_reviews");
+    Classifier.finalizeTraining();
   }
 
   private static void startUp()
